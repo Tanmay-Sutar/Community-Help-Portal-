@@ -1,0 +1,16 @@
+# Node.js
+node_modules/
+npm-debug.log
+dist/
+
+# Next.js
+.next/
+out/
+
+# VSCode
+.vscode/
+.DS_Store
+
+# Env files
+.env
+.env.local
