@@ -1,0 +1,2124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helpr.ai Pro - AI-Powered Community Network</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --dark-surface: rgba(15, 23, 42, 0.95);
+            --glass-surface: rgba(255, 255, 255, 0.1);
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --text-white: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.2);
+            --shadow-elevation: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: #0f172a;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .background-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Glassmorphism Header */
+        header {
+            background: var(--glass-surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-elevation);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            animation: pulse 2s infinite;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: var(--text-white);
+        }
+
+        .btn-secondary {
+            background: var(--glass-surface);
+            color: var(--text-white);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 8rem 0 4rem;
+            color: var(--text-white);
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #ffffff, #f0f9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3)); }
+            to { filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.6)); }
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        .cta-btn {
+            padding: 1.5rem 3rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            min-width: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-request {
+            background: var(--success-gradient);
+            color: var(--text-white);
+        }
+
+        .cta-help {
+            background: var(--warning-gradient);
+            color: var(--text-white);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* AI Features */
+        .ai-features {
+            padding: 4rem 0;
+            background: var(--glass-surface);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--glass-surface);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            color: var(--text-white);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-elevation);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+            background: var(--glass-surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            margin: 2rem 0;
+            padding: 3rem;
+            box-shadow: var(--shadow-elevation);
+            color: var(--text-white);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 2rem;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(34, 197, 94, 0.2);
+            border-radius: 20px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* AI Chat Interface */
+        .ai-chat-container {
+            background: var(--dark-surface);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-white);
+        }
+
+        .ai-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .chat-messages {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .message {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            animation: slideInUp 0.3s ease;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-content {
+            background: var(--glass-surface);
+            padding: 1rem 1.5rem;
+            border-radius: 18px;
+            max-width: 70%;
+            color: var(--text-white);
+        }
+
+        .message.user .message-content {
+            background: var(--primary-gradient);
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-white);
+            opacity: 0.7;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--text-white);
+            border-radius: 50%;
+            animation: typing 1.4s ease-in-out infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.7; }
+            30% { transform: translateY(-10px); opacity: 1; }
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: var(--glass-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            color: var(--text-white);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .chat-input input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .send-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Advanced Radar Map */
+        .radar-section {
+            background: var(--glass-surface);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            margin: 2rem 0;
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+        }
+
+        .radar-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .radar-sweep {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 50%;
+            background: linear-gradient(to bottom, #667eea, transparent);
+            transform-origin: bottom center;
+            animation: radarSweep 3s linear infinite;
+            transform: translate(-50%, -100%);
+        }
+
+        @keyframes radarSweep {
+            from { transform: translate(-50%, -100%) rotate(0deg); }
+            to { transform: translate(-50%, -100%) rotate(360deg); }
+        }
+
+        .radar-circles {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .radar-circle {
+            position: absolute;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 50%;
+            animation: radarPulse 4s ease-in-out infinite;
+        }
+
+        .radar-circle:nth-child(1) { width: 100px; height: 100px; margin: -50px; }
+        .radar-circle:nth-child(2) { width: 200px; height: 200px; margin: -100px; animation-delay: 1s; }
+        .radar-circle:nth-child(3) { width: 300px; height: 300px; margin: -150px; animation-delay: 2s; }
+        .radar-circle:nth-child(4) { width: 400px; height: 400px; margin: -200px; animation-delay: 3s; }
+
+        @keyframes radarPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        .help-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .help-point::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            animation: ripple 2s infinite;
+        }
+
+        .help-point.request {
+            background: #22c55e;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+        }
+
+        .help-point.request::before {
+            border: 2px solid #22c55e;
+        }
+
+        .help-point.offer {
+            background: #f59e0b;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+        }
+
+        .help-point.offer::before {
+            border: 2px solid #f59e0b;
+        }
+
+        .help-point:hover {
+            transform: scale(1.5);
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        /* Statistics Panel */
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: var(--glass-surface);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-white);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-elevation);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Form Sections */
+        .form-section {
+            display: none;
+            background: var(--glass-surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            margin: 2rem 0;
+            padding: 3rem;
+            color: var(--text-white);
+            box-shadow: var(--shadow-elevation);
+        }
+
+        .form-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Voice Input */
+        .voice-input {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .voice-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--warning-gradient);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .voice-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .voice-btn.recording {
+            animation: recordingPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes recordingPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+            50% { box-shadow: 0 0 0 20px rgba(245, 158, 11, 0); }
+        }
+
+        /* Smart Suggestions */
+        .suggestions-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .suggestion-chip {
+            padding: 0.5rem 1rem;
+            background: var(--glass-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            color: var(--text-white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .suggestion-chip:hover {
+            background: var(--primary-gradient);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .cta-container { flex-direction: column; align-items: center; }
+            .dashboard-header { flex-direction: column; gap: 1rem; text-align: center; }
+            .stats-panel { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* Utility Classes */
+        .hidden { display: none !important; }
+        .visible { display: block !important; }
+        .text-center { text-align: center; }
+
+        /* Matches Section */
+        .matches-section {
+            display: none;
+            background: var(--glass-surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            margin: 2rem 0;
+            padding: 3rem;
+            color: var(--text-white);
+        }
+
+        .match-card {
+            background: var(--dark-surface);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .match-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-elevation);
+        }
+
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .match-score {
+            background: var(--success-gradient);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .verified-badge {
+            background: #22c55e;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    Helpr.ai Pro
+                </div>
+                <div class="nav-buttons">
+                    <button class="nav-btn btn-secondary" onclick="showLogin()">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button class="nav-btn btn-primary" onclick="showSignup()">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </button>
+                    <button class="nav-btn btn-secondary hidden" id="logoutBtn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero" id="heroSection">
+            <div class="hero-content">
+                <h1>AI-Powered Community Network</h1>
+                <p class="subtitle">Where artificial intelligence meets human kindness</p>
+                
+                <div class="cta-container">
+                    <button class="cta-btn cta-request" onclick="startSmartRequest()">
+                        <i class="fas fa-magic"></i> Smart Request
+                    </button>
+                    <button class="cta-btn cta-help" onclick="startSmartOffer()">
+                        <i class="fas fa-rocket"></i> AI-Powered Help
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Features Showcase -->
+        <section class="ai-features">
+            <div class="text-center">
+                <h2 style="font-size: 2.5rem; color: white; margin-bottom: 1rem;">Next-Generation Features</h2>
+                <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem;">Powered by advanced AI and machine learning</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <h3>Voice-First Interface</h3>
+                    <p>Speak naturally to create requests, offers, and communicate with your community</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Smart Matching</h3>
+                    <p>Advanced algorithms predict perfect matches based on behavior, location, and preferences</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Predictive Analytics</h3>
+                    <p>AI predicts community needs before they happen and suggests proactive help</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Smart Safety</h3>
+                    <p>AI-powered identity verification and real-time safety monitoring</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Context Understanding</h3>
+                    <p>Natural language processing understands complex requests and emotions</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <h3>Real-time Coordination</h3>
+                    <p>Live tracking, instant notifications, and dynamic route optimization</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Dashboard -->
+        <section class="dashboard" id="dashboard">
+            <div class="dashboard-header">
+                <div class="user-profile">
+                    <div class="avatar" id="userAvatar">A</div>
+                    <div>
+                        <h2 id="userName">AI Assistant</h2>
+                        <p id="userLocation">Nagpur, Maharashtra</p>
+                        <div class="status-indicator">
+                            <div class="status-dot"></div>
+                            <span>Online & Ready to Help</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="background: var(--warning-gradient); color: white; padding: 1rem 2rem; border-radius: 25px; font-weight: bold; font-size: 1.2rem;">
+                        <i class="fas fa-star"></i> <span id="karmaPoints">2,450</span> Karma Points
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Panel -->
+            <div class="stats-panel">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalHelps">127</div>
+                    <div class="stat-label">Total Helps</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="activeRequests">8</div>
+                    <div class="stat-label">Active Requests</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="badgesEarned">15</div>
+                    <div class="stat-label">Badges Earned</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="responseTime">4.2</div>
+                    <div class="stat-label">Avg Response (min)</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                <button class="cta-btn cta-request" onclick="startSmartRequest()">
+                    <i class="fas fa-plus"></i> New Smart Request
+                </button>
+                <button class="cta-btn cta-help" onclick="startSmartOffer()">
+                    <i class="fas fa-heart"></i> Offer AI Help
+                </button>
+            </div>
+        </section>
+
+        <!-- Advanced Radar Map -->
+        <section class="radar-section">
+            <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">
+                <i class="fas fa-satellite"></i> Live Community Radar
+            </h2>
+            <p style="text-align: center; opacity: 0.8; margin-bottom: 2rem;">
+                AI-powered real-time visualization of help requests and offers in your area
+            </p>
+            
+            <div class="radar-container" id="radarMap">
+                <div class="radar-sweep"></div>
+                <div class="radar-circles">
+                    <div class="radar-circle"></div>
+                    <div class="radar-circle"></div>
+                    <div class="radar-circle"></div>
+                    <div class="radar-circle"></div>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <div style="width: 20px; height: 20px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);"></div>
+                    <span>Help Requests</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <div style="width: 20px; height: 20px; background: #f59e0b; border-radius: 50%; box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);"></div>
+                    <span>Help Offers</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <div style="width: 20px; height: 20px; background: #3b82f6; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                    <span>Active Helpers</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Smart Request Form -->
+        <section class="form-section" id="requestForm">
+            <div class="form-title">
+                <i class="fas fa-magic"></i> AI-Powered Smart Request
+            </div>
+            
+            <div class="ai-chat-container">
+                <div class="chat-header">
+                    <div class="ai-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <h3>AI Assistant</h3>
+                        <p style="opacity: 0.7;">Powered by advanced NLP</p>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="requestChatMessages">
+                    <div class="message">
+                        <div class="ai-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            Hi! I'm your AI assistant. I can understand natural language and help you create the perfect help request. Just tell me what you need assistance with - you can speak normally, like talking to a friend.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="typing-indicator" id="requestTyping">
+                    <div class="ai-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <span>AI is thinking...</span>
+                        <div class="typing-dots">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="voice-input">
+                    <button class="voice-btn" id="voiceRequestBtn" onclick="toggleVoiceRequest()">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <div class="chat-input">
+                        <input type="text" id="requestInput" placeholder="Describe what help you need..." onkeypress="handleRequestKeypress(event)">
+                        <button class="send-btn" onclick="sendRequestMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="suggestions-container">
+                    <div class="suggestion-chip" onclick="useSuggestion('I need grocery delivery for my elderly parents')">Grocery delivery for elderly</div>
+                    <div class="suggestion-chip" onclick="useSuggestion('Urgent medicine pickup from pharmacy')">Medicine pickup</div>
+                    <div class="suggestion-chip" onclick="useSuggestion('Need a ride to medical appointment')">Medical transport</div>
+                    <div class="suggestion-chip" onclick="useSuggestion('Pet care while I travel')">Pet care services</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Smart Offer Form -->
+        <section class="form-section" id="offerForm">
+            <div class="form-title">
+                <i class="fas fa-rocket"></i> AI-Enhanced Help Offering
+            </div>
+            
+            <div class="ai-chat-container">
+                <div class="chat-header">
+                    <div class="ai-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <h3>AI Helper Assistant</h3>
+                        <p style="opacity: 0.7;">Optimizing your help offerings</p>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="offerChatMessages">
+                    <div class="message">
+                        <div class="ai-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            Welcome, community helper! I'll help you create an optimized help offering that reaches the right people. Tell me about your skills, availability, and how you'd like to help your community.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="typing-indicator" id="offerTyping">
+                    <div class="ai-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <span>AI is analyzing...</span>
+                        <div class="typing-dots">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="voice-input">
+                    <button class="voice-btn" id="voiceOfferBtn" onclick="toggleVoiceOffer()">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <div class="chat-input">
+                        <input type="text" id="offerInput" placeholder="Tell me how you can help others..." onkeypress="handleOfferKeypress(event)">
+                        <button class="send-btn" onclick="sendOfferMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="suggestions-container">
+                    <div class="suggestion-chip" onclick="useSuggestion('I can provide grocery delivery on weekends')">Weekend grocery delivery</div>
+                    <div class="suggestion-chip" onclick="useSuggestion('Available for elderly care and companionship')">Elderly companionship</div>
+                    <div class="suggestion-chip" onclick="useSuggestion('I have a car and can provide transportation')">Transportation services</div>
+                    <div class="suggestion-chip" onclick="useSuggestion('Professional pet care and walking')">Pet care services</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Matches Section -->
+        <section class="matches-section" id="matchesSection">
+            <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">
+                <i class="fas fa-users"></i> AI-Powered Smart Matches
+            </h2>
+            <p style="text-align: center; opacity: 0.8; margin-bottom: 2rem;">
+                Our AI analyzes behavior patterns, location data, and preferences to find perfect matches
+            </p>
+            
+            <div id="matchesList">
+                <!-- Matches will be populated by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Enhanced Application State
+        const appState = {
+            user: null,
+            isLoggedIn: false,
+            requests: [],
+            offers: [],
+            matches: [],
+            karmaPoints: 2450,
+            chatStep: 0,
+            isVoiceRecording: false,
+            aiPersonality: 'helpful'
+        };
+
+        // Advanced AI Responses
+        const aiResponses = {
+            greeting: [
+                "Hello! I'm your AI assistant. I use natural language processing to understand exactly what you need.",
+                "Hi there! I'm powered by advanced AI to help create the perfect request for your needs.",
+                "Welcome! I can understand context, emotions, and urgency to match you with the best helpers."
+            ],
+            understanding: [
+                "I understand you need help with {category}. Let me analyze the best approach for your situation.",
+                "Based on your description, I can see this is a {urgency} priority request. I'll optimize the matching algorithm.",
+                "I'm processing your request using sentiment analysis and location optimization."
+            ],
+            matching: [
+                "AI is analyzing 1,247 potential helpers in your area using machine learning algorithms...",
+                "Running predictive models to find helpers with 95%+ compatibility scores...",
+                "Cross-referencing availability patterns and success rates for optimal matches..."
+            ]
+        };
+
+        // Sample Enhanced Data
+        const enhancedRequests = [
+            { 
+                id: 1, 
+                type: 'groceries', 
+                description: 'AI-analyzed grocery delivery for elderly parents with dietary restrictions', 
+                location: 'Rajarampuri', 
+                urgency: 'medium', 
+                user: 'Priya S.', 
+                match: 98,
+                aiScore: 'High Priority',
+                estimatedTime: '2-4 hours',
+                verificationLevel: 'AI Verified'
+            },
+            { 
+                id: 2, 
+                type: 'medicine', 
+                description: 'Critical medicine pickup with AI route optimization', 
+                location: 'Shivaji Peth', 
+                urgency: 'emergency', 
+                user: 'Raj M.', 
+                match: 95,
+                aiScore: 'Emergency',
+                estimatedTime: '30-60 minutes',
+                verificationLevel: 'AI + Human Verified'
+            },
+            { 
+                id: 3, 
+                type: 'pet-care', 
+                description: 'Professional dog walking with AI behavioral matching', 
+                location: 'Dharampeth', 
+                urgency: 'low', 
+                user: 'Anita K.', 
+                match: 92,
+                aiScore: 'Perfect Match',
+                estimatedTime: '1-2 hours',
+                verificationLevel: 'AI Verified'
+            }
+        ];
+
+        // Initialize Enhanced App
+        function initApp() {
+            generateAdvancedRadarPoints();
+            setInterval(generateAdvancedRadarPoints, 4000);
+            startAIAnimations();
+            
+            // Simulate real-time updates
+            setInterval(updateRealTimeStats, 10000);
+        }
+
+        // Advanced Authentication
+        function showLogin() {
+            const userData = {
+                name: 'Anil Sharma',
+                email: 'anil@example.com',
+                location: 'Nagpur, Maharashtra',
+                avatar: 'A',
+                aiPreference: 'proactive',
+                verificationLevel: 'AI + Biometric'
+            };
+            login(userData);
+        }
+
+        function showSignup() {
+            const userData = {
+                name: 'New Helper',
+                email: 'helper@example.com',
+                location: 'Nagpur, Maharashtra',
+                avatar: 'N',
+                aiPreference: 'balanced',
+                verificationLevel: 'AI Verified'
+            };
+            login(userData);
+        }
+
+        function login(userData) {
+            appState.user = userData;
+            appState.isLoggedIn = true;
+            
+            document.getElementById('userName').textContent = userData.name;
+            document.getElementById('userLocation').textContent = userData.location;
+            document.getElementById('userAvatar').textContent = userData.avatar;
+            document.getElementById('karmaPoints').textContent = appState.karmaPoints.toLocaleString();
+            
+            // Enhanced stats with AI metrics
+            document.getElementById('totalHelps').textContent = Math.floor(Math.random() * 200) + 50;
+            document.getElementById('activeRequests').textContent = Math.floor(Math.random() * 10) + 3;
+            document.getElementById('badgesEarned').textContent = Math.floor(Math.random() * 20) + 5;
+            document.getElementById('responseTime').textContent = (Math.random() * 5 + 1).toFixed(1);
+            
+            // Show/hide elements with smooth transitions
+            document.querySelector('.nav-buttons button:nth-child(1)').classList.add('hidden');
+            document.querySelector('.nav-buttons button:nth-child(2)').classList.add('hidden');
+            document.getElementById('logoutBtn').classList.remove('hidden');
+            document.getElementById('dashboard').style.display = 'block';
+            
+            showAIMatches();
+            showAIWelcomeMessage();
+        }
+
+        function logout() {
+            appState.user = null;
+            appState.isLoggedIn = false;
+            
+            document.querySelector('.nav-buttons button:nth-child(1)').classList.remove('hidden');
+            document.querySelector('.nav-buttons button:nth-child(2)').classList.remove('hidden');
+            document.getElementById('logoutBtn').classList.add('hidden');
+            document.getElementById('dashboard').style.display = 'none';
+            hideAllForms();
+        }
+
+        // AI-Enhanced Request Flow
+        function startSmartRequest() {
+            if (!appState.isLoggedIn) {
+                showSmartLoginPrompt('request');
+                return;
+            }
+            
+            hideAllForms();
+            document.getElementById('requestForm').style.display = 'block';
+            resetRequestChat();
+            addAIWelcomeMessage('request');
+        }
+
+        function startSmartOffer() {
+            if (!appState.isLoggedIn) {
+                showSmartLoginPrompt('offer');
+                return;
+            }
+            
+            hideAllForms();
+            document.getElementById('offerForm').style.display = 'block';
+            resetOfferChat();
+            addAIWelcomeMessage('offer');
+        }
+
+        function hideAllForms() {
+            document.getElementById('requestForm').style.display = 'none';
+            document.getElementById('offerForm').style.display = 'none';
+            document.getElementById('matchesSection').style.display = 'none';
+        }
+
+        // Smart Login Prompt
+        function showSmartLoginPrompt(type) {
+            const action = type === 'request' ? 'request help' : 'offer assistance';
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: var(--glass-surface);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--border-color);
+                border-radius: 20px;
+                padding: 2rem;
+                color: white;
+                text-align: center;
+                z-index: 1001;
+                box-shadow: var(--shadow-elevation);
+                max-width: 400px;
+                animation: slideInUp 0.5s ease;
+            `;
+            
+            notification.innerHTML = `
+                <div style="font-size: 3rem; margin-bottom: 1rem; color: #667eea;">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3 style="margin-bottom: 1rem;">AI Assistant Ready</h3>
+                <p style="margin-bottom: 2rem; opacity: 0.8;">
+                    Please login to ${action} with our advanced AI-powered platform
+                </p>
+                <button onclick="showLogin(); this.parentElement.remove();" 
+                        style="background: var(--primary-gradient); border: none; padding: 1rem 2rem; 
+                               border-radius: 25px; color: white; cursor: pointer; font-weight: 600; margin-right: 1rem;">
+                    Login with AI
+                </button>
+                <button onclick="this.parentElement.remove();" 
+                        style="background: transparent; border: 1px solid var(--border-color); padding: 1rem 2rem; 
+                               border-radius: 25px; color: white; cursor: pointer;">
+                    Cancel
+                </button>
+            `;
+            
+            document.body.appendChild(notification);
+        }
+
+        // Enhanced Chat System
+        function resetRequestChat() {
+            appState.chatStep = 0;
+            document.getElementById('requestChatMessages').innerHTML = '';
+        }
+
+        function resetOfferChat() {
+            appState.chatStep = 0;
+            document.getElementById('offerChatMessages').innerHTML = '';
+        }
+
+        function addAIWelcomeMessage(type) {
+            const messages = type === 'request' ? aiResponses.greeting : [
+                "Welcome, community helper! I'll use AI to optimize your help offering for maximum impact.",
+                "Hi! I'm your AI assistant for creating intelligent help offerings that reach those who need it most.",
+                "Hello! Let's use machine learning to match your skills with community needs perfectly."
+            ];
+            
+            const message = messages[Math.floor(Math.random() * messages.length)];
+            const messagesContainer = document.getElementById(type + 'ChatMessages');
+            
+            setTimeout(() => {
+                addChatMessage(message, true, type);
+            }, 500);
+        }
+
+        function addChatMessage(message, isAI, type) {
+            const messagesContainer = document.getElementById(type + 'ChatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isAI ? '' : 'user'}`;
+            
+            messageDiv.innerHTML = isAI 
+                ? `<div class="ai-avatar"><i class="fas fa-robot"></i></div><div class="message-content">${message}</div>`
+                : `<div class="message-content">${message}</div>`;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Voice Recognition Simulation
+        function toggleVoiceRequest() {
+            const btn = document.getElementById('voiceRequestBtn');
+            const input = document.getElementById('requestInput');
+            
+            if (!appState.isVoiceRecording) {
+                startVoiceRecording(btn, input, 'request');
+            } else {
+                stopVoiceRecording(btn);
+            }
+        }
+
+        function toggleVoiceOffer() {
+            const btn = document.getElementById('voiceOfferBtn');
+            const input = document.getElementById('offerInput');
+            
+            if (!appState.isVoiceRecording) {
+                startVoiceRecording(btn, input, 'offer');
+            } else {
+                stopVoiceRecording(btn);
+            }
+        }
+
+        function startVoiceRecording(btn, input, type) {
+            appState.isVoiceRecording = true;
+            btn.classList.add('recording');
+            btn.innerHTML = '<i class="fas fa-stop"></i>';
+            
+            // Simulate voice recognition
+            setTimeout(() => {
+                const sampleVoiceInputs = {
+                    request: [
+                        "I need help with grocery delivery for my elderly mother who lives alone",
+                        "Can someone help me pick up medicine from the pharmacy tomorrow morning",
+                        "I need a ride to my medical appointment next Tuesday"
+                    ],
+                    offer: [
+                        "I can help with grocery shopping and delivery on weekends",
+                        "I'm available to provide transportation help with my car",
+                        "I can offer elderly care and companionship services"
+                    ]
+                };
+                
+                const randomInput = sampleVoiceInputs[type][Math.floor(Math.random() * sampleVoiceInputs[type].length)];
+                input.value = randomInput;
+                stopVoiceRecording(btn);
+                
+                // Auto-send after voice input
+                setTimeout(() => {
+                    if (type === 'request') {
+                        sendRequestMessage();
+                    } else {
+                        sendOfferMessage();
+                    }
+                }, 500);
+            }, 3000);
+        }
+
+        function stopVoiceRecording(btn) {
+            appState.isVoiceRecording = false;
+            btn.classList.remove('recording');
+            btn.innerHTML = '<i class="fas fa-microphone"></i>';
+        }
+
+        // Enhanced Message Handling
+        function handleRequestKeypress(event) {
+            if (event.key === 'Enter') {
+                sendRequestMessage();
+            }
+        }
+
+        function handleOfferKeypress(event) {
+            if (event.key === 'Enter') {
+                sendOfferMessage();
+            }
+        }
+
+        function sendRequestMessage() {
+            const input = document.getElementById('requestInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addChatMessage(message, false, 'request');
+            input.value = '';
+            
+            showTypingIndicator('request');
+            
+            setTimeout(() => {
+                hideTypingIndicator('request');
+                processAIRequestResponse(message);
+            }, 2000);
+        }
+
+        function sendOfferMessage() {
+            const input = document.getElementById('offerInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addChatMessage(message, false, 'offer');
+            input.value = '';
+            
+            showTypingIndicator('offer');
+            
+            setTimeout(() => {
+                hideTypingIndicator('offer');
+                processAIOfferResponse(message);
+            }, 2000);
+        }
+
+        function showTypingIndicator(type) {
+            document.getElementById(type + 'Typing').style.display = 'flex';
+        }
+
+        function hideTypingIndicator(type) {
+            document.getElementById(type + 'Typing').style.display = 'none';
+        }
+
+        // Advanced AI Response Processing
+        function processAIRequestResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            let response = '';
+            
+            // Enhanced NLP simulation
+            if (lowerMessage.includes('grocery') || lowerMessage.includes('food')) {
+                response = "I've analyzed your grocery needs using dietary preference algorithms. I'm now scanning for helpers with 95%+ success rates in grocery delivery. Would you like me to prioritize organic stores or budget-friendly options?";
+            } else if (lowerMessage.includes('medicine') || lowerMessage.includes('pharmacy')) {
+                response = "This is flagged as a medical priority request. I'm activating emergency protocols and notifying verified medical helpers within 2km radius. I've also cross-referenced pharmacy hours and medication availability.";
+            } else if (lowerMessage.includes('elderly') || lowerMessage.includes('senior')) {
+                response = "I understand this involves elderly care. I'm using empathy algorithms to match you with helpers who have specialized elderly care training and positive behavioral ratings. Safety protocols are automatically enabled.";
+            } else if (lowerMessage.includes('transport') || lowerMessage.includes('ride')) {
+                response = "Transportation request processed. AI is calculating optimal routes, checking helper vehicle safety ratings, and verifying insurance coverage. I can also suggest public transport alternatives if needed.";
+            } else {
+                response = "I'm analyzing your request using natural language processing. The AI has detected keywords and sentiment patterns. Let me gather more context to provide the most accurate help matching.";
+            }
+            
+            addChatMessage(response, true, 'request');
+            
+            appState.chatStep++;
+            if (appState.chatStep >= 2) {
+                setTimeout(() => {
+                    addChatMessage("Perfect! I've processed your request using advanced AI algorithms. Here are your smart-matched helpers with 90%+ compatibility scores:", true, 'request');
+                    showAIMatches();
+                }, 3000);
+            }
+        }
+
+        function processAIOfferResponse(message) {
+            const responses = [
+                "Excellent! I'm analyzing your skills using competency mapping algorithms. Your help profile will be optimized for maximum community impact.",
+                "Great! The AI is categorizing your abilities and cross-referencing with current community needs. Your offering has been flagged as 'High Demand'.",
+                "Perfect! Machine learning models are predicting optimal match scenarios for your skills. You'll be notified about compatible requests automatically."
+            ];
+            
+            const response = responses[Math.floor(Math.random() * responses.length)];
+            addChatMessage(response, true, 'offer');
+            
+            setTimeout(() => {
+                addChatMessage("Your AI-optimized help offering is now live! Smart notifications are enabled for perfect matches.", true, 'offer');
+                appState.karmaPoints += 50;
+                document.getElementById('karmaPoints').textContent = appState.karmaPoints.toLocaleString();
+                showAIMatches();
+            }, 3000);
+        }
+
+        // Suggestion System
+        function useSuggestion(suggestion) {
+            const activeInput = document.querySelector('.form-section:not([style*="display: none"]) .chat-input input');
+            if (activeInput) {
+                activeInput.value = suggestion;
+                activeInput.focus();
+            }
+        }
+
+        // Enhanced Radar System
+        function generateAdvancedRadarPoints() {
+            const radar = document.getElementById('radarMap');
+            const existingPoints = radar.querySelectorAll('.help-point');
+            existingPoints.forEach(point => point.remove());
+            
+            const numPoints = Math.floor(Math.random() * 12) + 8;
+            
+            for (let i = 0; i < numPoints; i++) {
+                const point = document.createElement('div');
+                const types = ['request', 'offer', 'active'];
+                const type = types[Math.floor(Math.random() * types.length)];
+                
+                point.className = `help-point ${type}`;
+                point.style.left = Math.random() * 90 + 5 + '%';
+                point.style.top = Math.random() * 90 + 5 + '%';
+                
+                // Enhanced click handler with AI info
+                point.onclick = () => showAIPointInfo(point, type);
+                
+                radar.appendChild(point);
+            }
+        }
+
+        function showAIPointInfo(point, type) {
+            const aiInfo = {
+                request: [
+                    'AI Priority: High urgency grocery delivery',
+                    'ML Confidence: 94% match accuracy',
+                    'Smart Route: 2.3km, 8min drive',
+                    'AI Safety Score: 98% verified helper'
+                ],
+                offer: [
+                    'AI Analysis: Perfect skill match available',
+                    'Predictive Model: 97% success probability',
+                    'Smart Scheduling: Available in 15 minutes',
+                    'AI Rating: 5-star helper with biometric ID'
+                ],
+                active: [
+                    'Live AI Coordination: Helper en route',
+                    'Real-time Tracking: ETA 12 minutes',
+                    'Smart Updates: Auto-notifications enabled',
+                    'AI Monitor: Safety protocols active'
+                ]
+            };
+            
+            const randomInfo = aiInfo[type][Math.floor(Math.random() * aiInfo[type].length)];
+            
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 120px;
+                right: 20px;
+                background: var(--glass-surface);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--border-color);
+                border-radius: 15px;
+                padding: 1.5rem;
+                color: white;
+                z-index: 1001;
+                max-width: 350px;
+                box-shadow: var(--shadow-elevation);
+                animation: slideInUp 0.3s ease;
+            `;
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="width: 40px; height: 40px; background: var(--primary-gradient); 
+                                border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div>
+                        <h4>AI Live Intel</h4>
+                        <p style="opacity: 0.7; margin: 0; font-size: 0.9rem;">${randomInfo}</p>
+                    </div>
+                </div>
+                <button onclick="this.parentElement.remove()" 
+                        style="position: absolute; top: 10px; right: 10px; background: none; 
+                               border: none; color: white; font-size: 1.2rem; cursor: pointer;">×</button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 8000);
+        }
+
+        // AI Matches System
+        function showAIMatches() {
+            document.getElementById('matchesSection').style.display = 'block';
+            const matchesList = document.getElementById('matchesList');
+            
+            const aiMatches = enhancedRequests.map(request => ({
+                ...request,
+                aiInsights: generateAIInsights(request)
+            }));
+            
+            if (aiMatches.length === 0) {
+                matchesList.innerHTML = `
+                    <div style="text-align: center; padding: 4rem; color: rgba(255, 255, 255, 0.7);">
+                        <div style="font-size: 4rem; margin-bottom: 2rem;">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>AI is Learning Your Preferences</h3>
+                        <p>Create requests or offers to activate our intelligent matching system</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            matchesList.innerHTML = aiMatches.map(match => `
+                <div class="match-card">
+                    <div class="match-header">
+                        <div>
+                            <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+                                ${match.user}
+                                ${match.verificationLevel === 'AI + Human Verified' ? 
+                                    '<span class="verified-badge"><i class="fas fa-shield-check"></i> AI+ Verified</span>' : 
+                                    '<span class="verified-badge"><i class="fas fa-check"></i> AI Verified</span>'}
+                            </h3>
+                            <p style="opacity: 0.8; margin: 0.5rem 0;"><i class="fas fa-map-marker-alt"></i> ${match.location}</p>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                <span style="background: var(--success-gradient); color: white; padding: 0.2rem 0.8rem; 
+                                             border-radius: 15px; font-size: 0.8rem; font-weight: bold;">
+                                    ${match.aiScore}
+                                </span>
+                                <span style="background: var(--warning-gradient); color: white; padding: 0.2rem 0.8rem; 
+                                             border-radius: 15px; font-size: 0.8rem;">
+                                    ETA: ${match.estimatedTime}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="match-score">${match.match}% AI Match</div>
+                    </div>
+                    
+                    <p style="margin: 1rem 0; line-height: 1.6;">${match.description}</p>
+                    
+                    <div style="background: var(--dark-surface); padding: 1rem; border-radius: 10px; margin: 1rem 0;">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;">
+                            <i class="fas fa-brain"></i> AI Insights
+                        </h4>
+                        <p style="font-size: 0.9rem; opacity: 0.9;">${match.aiInsights}</p>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                        <button onclick="connectWithAI('${match.id}', '${match.user}')" 
+                                style="flex: 1; min-width: 140px; background: var(--success-gradient); 
+                                       color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 25px; 
+                                       cursor: pointer; font-weight: 600; transition: all 0.3s ease;">
+                            <i class="fas fa-comment-dots"></i> AI Connect
+                        </button>
+                        <button onclick="viewAIProfile('${match.id}', '${match.user}')" 
+                                style="flex: 1; min-width: 140px; background: var(--glass-surface); 
+                                       color: white; border: 1px solid var(--border-color); padding: 0.8rem 1.5rem; 
+                                       border-radius: 25px; cursor: pointer; transition: all 0.3s ease;">
+                            <i class="fas fa-user-robot"></i> AI Profile
+                        </button>
+                        <button onclick="requestAIOptimization('${match.id}')" 
+                                style="flex: 1; min-width: 140px; background: var(--warning-gradient); 
+                                       color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 25px; 
+                                       cursor: pointer; font-weight: 600; transition: all 0.3s ease;">
+                            <i class="fas fa-magic"></i> Optimize
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function generateAIInsights(request) {
+            const insights = [
+                `Machine learning analysis shows ${request.match}% behavioral compatibility based on 47 interaction patterns.`,
+                `AI predicts 94% success rate based on helper's track record and your request parameters.`,
+                `Natural language processing detected ${request.urgency} urgency with positive sentiment indicators.`,
+                `Predictive algorithms suggest optimal timing: ${request.estimatedTime} for maximum efficiency.`,
+                `Safety AI has verified this helper through biometric scanning and behavioral analysis.`,
+                `Smart routing algorithms have optimized the interaction path for minimal wait time.`
+            ];
+            
+            return insights[Math.floor(Math.random() * insights.length)];
+        }
+
+        // Enhanced User Interactions
+        function connectWithAI(matchId, userName) {
+            showAIConnectionDialog(userName);
+        }
+
+        function viewAIProfile(matchId, userName) {
+            showAIProfileModal(userName);
+        }
+
+        function requestAIOptimization(matchId) {
+            showAIOptimizationDialog();
+        }
+
+        function showAIConnectionDialog(userName) {
+            const dialog = document.createElement('div');
+            dialog.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                z-index: 1002;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            dialog.innerHTML = `
+                <div style="background: var(--glass-surface); backdrop-filter: blur(20px); 
+                           border: 1px solid var(--border-color); border-radius: 25px; 
+                           padding: 3rem; max-width: 500px; width: 90%; color: white; text-align: center;
+                           box-shadow: var(--shadow-elevation);">
+                    <div style="font-size: 4rem; margin-bottom: 2rem; background: var(--success-gradient);
+                               -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h2 style="margin-bottom: 1.5rem;">AI-Powered Connection</h2>
+                    <p style="opacity: 0.9; margin-bottom: 2rem; line-height: 1.6;">
+                        AI is initiating secure connection with <strong>${userName}</strong>. 
+                        Smart conversation prompts, safety protocols, and real-time translation 
+                        are now active.
+                    </p>
+                    <div style="background: var(--dark-surface); padding: 1.5rem; border-radius: 15px; margin-bottom: 2rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span>AI Safety Check</span>
+                            <span style="color: #22c55e;"><i class="fas fa-check"></i> Verified</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span>Smart Matching</span>
+                            <span style="color: #22c55e;"><i class="fas fa-check"></i> 98% Compatible</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Real-time Support</span>
+                            <span style="color: #22c55e;"><i class="fas fa-check"></i> AI Assistant Ready</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <button onclick="startAIChat('${userName}'); this.parentElement.parentElement.parentElement.remove();" 
+                                style="background: var(--success-gradient); color: white; border: none; 
+                                       padding: 1rem 2rem; border-radius: 25px; cursor: pointer; font-weight: 600;">
+                            <i class="fas fa-comments"></i> Start AI Chat
+                        </button>
+                        <button onclick="this.parentElement.parentElement.parentElement.remove();" 
+                                style="background: var(--glass-surface); color: white; border: 1px solid var(--border-color); 
+                                       padding: 1rem 2rem; border-radius: 25px; cursor: pointer;">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(dialog);
+        }
+
+        function showAIProfileModal(userName) {
+            const profileData = {
+                name: userName,
+                aiScore: Math.floor(Math.random() * 20) + 80,
+                completedHelps: Math.floor(Math.random() * 100) + 25,
+                avgResponse: (Math.random() * 10 + 2).toFixed(1),
+                specialties: ['Grocery Delivery', 'Senior Care', 'Pet Services'],
+                aiInsights: [
+                    'Consistently exceeds expectations',
+                    'High emotional intelligence detected',
+                    'Punctual and reliable based on ML analysis',
+                    'Excellent communication patterns'
+                ]
+            };
+            
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                z-index: 1002;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: var(--glass-surface); backdrop-filter: blur(20px); 
+                           border: 1px solid var(--border-color); border-radius: 25px; 
+                           padding: 3rem; max-width: 600px; width: 90%; color: white;
+                           box-shadow: var(--shadow-elevation); max-height: 80vh; overflow-y: auto;">
+                    
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <div style="width: 100px; height: 100px; background: var(--primary-gradient); 
+                                   border-radius: 50%; margin: 0 auto 1rem; display: flex; 
+                                   align-items: center; justify-content: center; font-size: 2.5rem; color: white;">
+                            ${userName.charAt(0)}
+                        </div>
+                        <h2>${userName}</h2>
+                        <div style="background: var(--success-gradient); color: white; padding: 0.5rem 1.5rem; 
+                                   border-radius: 20px; display: inline-block; margin-top: 0.5rem;">
+                            AI Score: ${profileData.aiScore}%
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        <div style="background: var(--dark-surface); padding: 1.5rem; border-radius: 15px; text-align: center;">
+                            <div style="font-size: 2rem; color: #22c55e; margin-bottom: 0.5rem;">${profileData.completedHelps}</div>
+                            <div style="opacity: 0.8;">Completed Helps</div>
+                        </div>
+                        <div style="background: var(--dark-surface); padding: 1.5rem; border-radius: 15px; text-align: center;">
+                            <div style="font-size: 2rem; color: #3b82f6; margin-bottom: 0.5rem;">${profileData.avgResponse}min</div>
+                            <div style="opacity: 0.8;">Avg Response</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: #667eea;"><i class="fas fa-star"></i> Specialties</h3>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            ${profileData.specialties.map(specialty => 
+                                `<span style="background: var(--primary-gradient); color: white; padding: 0.4rem 1rem; 
+                                        border-radius: 15px; font-size: 0.9rem;">${specialty}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: #667eea;"><i class="fas fa-brain"></i> AI Behavioral Analysis</h3>
+                        <div style="background: var(--dark-surface); padding: 1.5rem; border-radius: 15px;">
+                            ${profileData.aiInsights.map(insight => 
+                                `<p style="margin-bottom: 0.5rem; opacity: 0.9;"><i class="fas fa-check" style="color: #22c55e; margin-right: 0.5rem;"></i>${insight}</p>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <button onclick="startAIChat('${userName}'); this.parentElement.parentElement.parentElement.remove();" 
+                                style="background: var(--success-gradient); color: white; border: none; 
+                                       padding: 1rem 2rem; border-radius: 25px; cursor: pointer; font-weight: 600;">
+                            <i class="fas fa-comment-dots"></i> Connect Now
+                        </button>
+                        <button onclick="this.parentElement.parentElement.parentElement.remove();" 
+                                style="background: var(--glass-surface); color: white; border: 1px solid var(--border-color); 
+                                       padding: 1rem 2rem; border-radius: 25px; cursor: pointer;">
+                            Close Profile
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function startAIChat(userName) {
+            showSuccessNotification(`AI Chat initiated with ${userName}! Smart conversation assistance is now active.`);
+            appState.karmaPoints += 15;
+            document.getElementById('karmaPoints').textContent = appState.karmaPoints.toLocaleString();
+        }
+
+        function showAIOptimizationDialog() {
+            const dialog = document.createElement('div');
+            dialog.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                z-index: 1002;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            dialog.innerHTML = `
+                <div style="background: var(--glass-surface); backdrop-filter: blur(20px); 
+                           border: 1px solid var(--border-color); border-radius: 25px; 
+                           padding: 3rem; max-width: 500px; width: 90%; color: white; text-align: center;
+                           box-shadow: var(--shadow-elevation);">
+                    <div style="font-size: 4rem; margin-bottom: 2rem; background: var(--warning-gradient);
+                               -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h2 style="margin-bottom: 1.5rem;">AI Optimization Engine</h2>
+                    <p style="opacity: 0.9; margin-bottom: 2rem; line-height: 1.6;">
+                        Our AI will analyze this interaction and optimize future matches, 
+                        timing, and communication patterns for better results.
+                    </p>
+                    <div id="optimizationProgress" style="background: var(--dark-surface); padding: 1.5rem; border-radius: 15px; margin-bottom: 2rem;">
+                        <div style="margin-bottom: 1rem;">Analyzing interaction patterns...</div>
+                        <div style="background: var(--glass-surface); height: 8px; border-radius: 4px; overflow: hidden;">
+                            <div id="progressBar" style="background: var(--warning-gradient); height: 100%; width: 0%; transition: width 0.3s ease;"></div>
+                        </div>
+                    </div>
+                    <button onclick="runAIOptimization(this.parentElement.parentElement)" 
+                            style="background: var(--warning-gradient); color: white; border: none; 
+                                   padding: 1rem 2rem; border-radius: 25px; cursor: pointer; font-weight: 600; margin-right: 1rem;">
+                        <i class="fas fa-play"></i> Start Optimization
+                    </button>
+                    <button onclick="this.parentElement.parentElement.remove();" 
+                            style="background: var(--glass-surface); color: white; border: 1px solid var(--border-color); 
+                                   padding: 1rem 2rem; border-radius: 25px; cursor: pointer;">
+                        Cancel
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(dialog);
+        }
+
+        function runAIOptimization(dialog) {
+            const progressBar = dialog.querySelector('#progressBar');
+            const progressText = dialog.querySelector('#optimizationProgress > div');
+            
+            const steps = [
+                'Analyzing user behavior patterns...',
+                'Processing communication preferences...',
+                'Optimizing matching algorithms...',
+                'Updating AI neural networks...',
+                'Calibrating success predictions...',
+                'Optimization complete!'
+            ];
+            
+            let step = 0;
+            const interval = setInterval(() => {
+                progressText.textContent = steps[step];
+                progressBar.style.width = ((step + 1) / steps.length) * 100 + '%';
+                
+                step++;
+                if (step >= steps.length) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        dialog.remove();
+                        showSuccessNotification('AI optimization complete! Your future matches will be 23% more accurate.');
+                        appState.karmaPoints += 25;
+                        document.getElementById('karmaPoints').textContent = appState.karmaPoints.toLocaleString();
+                    }, 1000);
+                }
+            }, 800);
+        }
+
+        // Utility Functions
+        function showSuccessNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 120px;
+                right: 20px;
+                background: var(--success-gradient);
+                color: white;
+                padding: 1.5rem;
+                border-radius: 15px;
+                box-shadow: var(--shadow-elevation);
+                z-index: 1001;
+                max-width: 400px;
+                animation: slideInRight 0.5s ease;
+            `;
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="font-size: 1.5rem;"><i class="fas fa-check-circle"></i></div>
+                    <div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem;">AI Success!</div>
+                        <div style="opacity: 0.9;">${message}</div>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" 
+                            style="background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;">×</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 6000);
+        }
+
+        function showAIWelcomeMessage() {
+            setTimeout(() => {
+                showSuccessNotification('Welcome to Helpr.ai Pro! Your AI assistant is ready with advanced matching algorithms.');
+            }, 1000);
+        }
+
+        // Real-time Updates
+        function updateRealTimeStats() {
+            if (appState.isLoggedIn) {
+                // Simulate real-time stat updates
+                const totalHelps = document.getElementById('totalHelps');
+                const activeRequests = document.getElementById('activeRequests');
+                
+                if (Math.random() > 0.7) {
+                    const currentHelps = parseInt(totalHelps.textContent);
+                    totalHelps.textContent = currentHelps + 1;
+                    totalHelps.style.animation = 'pulse 0.5s ease';
+                    setTimeout(() => totalHelps.style.animation = '', 500);
+                }
+                
+                if (Math.random() > 0.8) {
+                    const currentRequests = parseInt(activeRequests.textContent);
+                    activeRequests.textContent = Math.max(0, currentRequests + (Math.random() > 0.5 ? 1 : -1));
+                    activeRequests.style.animation = 'pulse 0.5s ease';
+                    setTimeout(() => activeRequests.style.animation = '', 500);
+                }
+            }
+        }
+
+        // AI Animations
+        function startAIAnimations() {
+            // Add floating particles effect
+            const particles = [];
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: fixed;
+                    width: 4px;
+                    height: 4px;
+                    background: rgba(102, 126, 234, 0.3);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: -1;
+                `;
+                document.body.appendChild(particle);
+                particles.push(particle);
+            }
+            
+            function animateParticles() {
+                particles.forEach((particle, index) => {
+                    const x = Math.sin(Date.now() * 0.001 + index) * 100 + window.innerWidth / 2;
+                    const y = Math.cos(Date.now() * 0.0015 + index) * 100 + window.innerHeight / 2;
+                    particle.style.left = x + 'px';
+                    particle.style.top = y + 'px';
+                    particle.style.opacity = Math.sin(Date.now() * 0.003 + index) * 0.5 + 0.5;
+                });
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+        }
+
+        // Add CSS animations
+        const additionalStyles = document.createElement('style');
+        additionalStyles.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            .nav-btn:hover, .cta-btn:hover, .stat-card:hover, .feature-card:hover, .match-card:hover {
+                cursor: pointer;
+            }
+        `;
+        document.head.appendChild(additionalStyles);
+
+        // Initialize the enhanced app
+        document.addEventListener('DOMContentLoaded', initApp);
+
+        // Periodic AI notifications
+        setInterval(() => {
+            if (appState.isLoggedIn && Math.random() > 0.85) {
+                const aiNotifications = [
+                    'AI detected a perfect match opportunity nearby!',
+                    'Your help prediction accuracy improved to 94%',
+                    'Smart routing saved 15 minutes on your last help session',
+                    'AI safety protocols updated with new verification methods',
+                    'Your community impact score increased by 12 points'
+                ];
+                
+                const randomNotification = aiNotifications[Math.floor(Math.random() * aiNotifications.length)];
+                showSuccessNotification(randomNotification);
+            }
+        }, 20000);
+    </script>
+</body>
+</html>
