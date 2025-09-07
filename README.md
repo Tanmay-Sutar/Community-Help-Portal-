@@ -21,35 +21,35 @@ The Community Help Portal bridges this gap by connecting help seekers and volunt
 ---
 
 ## 💡 Our Solution
-We designed *Community Help Portal*:  
-- 🔎 *AI-powered matching system* to connect seekers & volunteers efficiently  
-- ✅ *Verification workflows* to ensure trust and safety  
-- 📊 *Role-based dashboards* for Users, Volunteers, and Admins 
-- 💬 *Real-time chat support* for instant communication  
-- ⚡ *Scalable & Dockerized* for fast deployment anywhere  
+We designed Community Help Portal:  
+- 🔎 AI-powered matching system to connect seekers & volunteers efficiently  
+- ✅ Verification workflows to ensure trust and safety  
+- 📊 Role-based dashboards for Users, Volunteers, and Admins 
+- 💬 Real-time chat support for instant communication  
+- ⚡ Scalable & Dockerized for fast deployment anywhere  
 
 ---
 
 ## ✨ Features
-- *Multi-role Access* → User, Volunteer, Admin dashboards  
-- *AI Matching Engine* → Finds the best volunteer for each request  
-- *Verification System* → Builds trust between users  
-- *Chat Module* → Direct communication between seekers & helpers  
-- *Scalable Deployment* → Docker-ready for cloud or local hosting  
+- Multi-role Access → User, Volunteer, Admin dashboards  
+- AI Matching Engine → Finds the best volunteer for each request  
+- Verification System → Builds trust between users  
+- Chat Module → Direct communication between seekers & helpers  
+- Scalable Deployment → Docker-ready for cloud or local hosting  
 
 ---
 
 ## 🛠 Tech Stack
-*Frontend:* Next.js (React) + TailwindCSS  
-*Backend:* Node.js + Express  
-*Database:* MongoDB  
-*AI/ML:* Python (matching logic)  
-*Deployment:* Docker + [Netlify / Vercel / Render] 
+Frontend: Next.js (React) + TailwindCSS  
+Backend: Node.js + Express  
+Database: MongoDB  
+AI/ML: Python (matching logic)  
+Deployment: Docker + [Netlify / Vercel / Render] 
 
 ---
 
 ## 📂 Project Structure  
-*Community-Help-Portal--main/*
+Community-Help-Portal--main/
 
 │── frontend/ # Next.js app (UI + dashboards)
 
@@ -63,7 +63,7 @@ We designed *Community Help Portal*:
 
 │── README.md # You are here
 
-🔹 *Setup Backend*
+🔹 Setup Backend
 
 cd backend
 
@@ -71,7 +71,7 @@ npm install
 
 npm start
 
-🔹 *Setup Frontend*
+🔹 Setup Frontend
 
 cd frontend
 
@@ -79,7 +79,7 @@ npm install
 
 npm run dev
 
-🔹 *Run with Docker*
+🔹 Run with Docker
 
 docker build -t community-help-portal .
 
@@ -92,13 +92,17 @@ docker run -p 3000:3000 community-help-portal
 <img width="1920" height="1020" alt="Screenshot 2025-09-07 131556" src="https://github.com/user-attachments/assets/522ce1b9-a1e1-43e9-aaf2-3eb3efb9ed3b" />
 <img width="655" height="644" alt="Screenshot 2025-09-07 131641" src="https://github.com/user-attachments/assets/07f4b68c-9f5a-496b-850e-c68c4b5f0b61" />
 
+---
 
+
+## 📑 Presentation
+[View PPT on Google Drive](https://docs.google.com/presentation/d/124QxyQbfgYq2auCz8CdvfhIYKlXmzGJv/edit?usp=sharing&ouid=106697613095975699370&rtpof=true&sd=true)
 ---
 ## 📍 User Roles
 
-- 👤 *User* → Request help, view matches, chat with volunteers  
-- 🤝 *Volunteer* → Browse requests, offer help, verify availability  
-- 🛡 *Admin* → Approve accounts, monitor activity, ensure safety  
+- 👤 User → Request help, view matches, chat with volunteers  
+- 🤝 Volunteer → Browse requests, offer help, verify availability  
+- 🛡 Admin → Approve accounts, monitor activity, ensure safety  
 
 ---
 
@@ -106,10 +110,10 @@ docker run -p 3000:3000 community-help-portal
 
 This project:  
 
-- 🌍 *Solves a real-world community problem*  
-- 🤖 *Uses AI for social good*  
-- ⏳ *Built in 20 hours under extreme time constraints*  
-- 🚀 *Fully deployable, scalable, and secure*  
+- 🌍 Solves a real-world community problem  
+- 🤖 Uses AI for social good  
+- ⏳ Built in 20 hours under extreme time constraints  
+- 🚀 Fully deployable, scalable, and secure  
 
 ---
 
@@ -127,9 +131,5 @@ This project:
 
 ## 👥 Contributors
 
-- *Mansi Arasgonda* – UI/UX Design & Frontend (Next.js)
-- *Tanmay Sutar* – Backend & AI Matching Model
-
-
-
-
+- Mansi Arasgonda – UI/UX Design & Frontend (Next.js)
+- Tanmay Sutar – Backend & AI Matching Model
