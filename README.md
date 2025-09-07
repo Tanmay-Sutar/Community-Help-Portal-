@@ -87,7 +87,10 @@ docker run -p 3000:3000 community-help-portal
 
 ---
 ## 📸 Screenshots
-!(<img width="655" height="644" alt="Screenshot 2025-09-07 131641" src="https://github.com/user-attachments/assets/07f4b68c-9f5a-496b-850e-c68c4b5f0b61" />)
+<img width="1920" height="1020" alt="Screenshot 2025-09-07 131343" src="https://github.com/user-attachments/assets/3c42574b-1492-4824-96f7-c0ccc044f0c6" />
+<img width="476" height="758" alt="Screenshot 2025-09-07 131208" src="https://github.com/user-attachments/assets/03136e3e-7ab6-4547-97c1-8cbecda780a2" />
+<img width="1920" height="1020" alt="Screenshot 2025-09-07 131556" src="https://github.com/user-attachments/assets/522ce1b9-a1e1-43e9-aaf2-3eb3efb9ed3b" />
+<img width="655" height="644" alt="Screenshot 2025-09-07 131641" src="https://github.com/user-attachments/assets/07f4b68c-9f5a-496b-850e-c68c4b5f0b61" />
 
 
 ---
@@ -126,5 +129,6 @@ This project:
 
 - *Mansi Arasgonda* – UI/UX Design & Frontend (Next.js)
 - *Tanmay Sutar* – Backend & AI Matching Model
+
 
 
